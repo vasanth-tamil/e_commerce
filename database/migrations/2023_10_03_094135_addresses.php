@@ -11,9 +11,14 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
-            $table->string('address');
-            $table->string('phone');
-            $table->string('zip_code', 10);
+            
+            // address
+            $table->string('country');
+            $table->string('state');
+            $table->string('zip', 12);
+            $table->string('city');
+            $table->string('address_1');
+            $table->string('address_2');
 
             $table->bigInteger("user_id")->unsigned()->index()->nullable(False);
             $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
