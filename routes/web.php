@@ -18,4 +18,4 @@ Route::get('/product', function () {
 });
 Route::get('/orders', function () {
     return view('admin.orders.index');
-});
+}); 
