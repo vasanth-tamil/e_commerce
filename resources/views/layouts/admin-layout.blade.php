@@ -14,7 +14,7 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Ecommerce</title>
+	<title>@section('title') @show</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/Ecommerce.jpeg') }}">
