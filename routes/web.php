@@ -13,6 +13,9 @@ Route::get('/', function () {
 });
 
 Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+Route::get('/category-add', [CategoryController::class, 'create'])->name('admin.category-add');
+
+// Sub Category
 Route::get('/sub-category', [SubCategoryController::class, 'index']);
 Route::get('/order',[OrderController::class, 'index'])->name('admin.order');
 Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
