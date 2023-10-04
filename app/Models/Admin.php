@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubCategory extends Model
+class Admin extends Model
 {
     use HasFactory;
 
-    protected $fillable [
-        'name',
-        'image',
-        'category_id',
-        'status'
-    ];
+    protected $fillable = [
+        "logo",
+        "f_name"
+        "l_name",
+        "role",
+        "email"
+    ]
 }
