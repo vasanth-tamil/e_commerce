@@ -19,24 +19,32 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><strong>02</strong></td>
-					<td>Mr. Bobby</td>
-					<td>Dr. Jackson</td>
-					<td><span class="badge light badge-danger">Canceled</span></td>
-					<td>
-						<div class="dropdown">
-							<button type="button" class="btn btn-danger light sharp" data-bs-toggle="dropdown">
-								<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
-							</button>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Edit</a>
-								<a class="dropdown-item" href="#">Delete</a>
+				@foreach($categories as $index => $category)
+					<tr>
+						<td><strong>{{ $index + 1 }}</strong></td>
+						<td>{{ $category->image }}</td>
+						<td>{{ $category->name }}</td>
+						<td>
+							<span class="badge light {{ $category->status? 'badge-success': 'badge-danger' }}">
+								{{ $category->status? 'Active': 'Inactive' }}
+							</span>
+						</td>
+						<td>
+							{{ $category->created_at }}
+						</td>
+						<td>
+							<div class="dropdown">
+								<button type="button" class="btn btn-danger light sharp" data-bs-toggle="dropdown">
+									<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">Edit</a>
+									<a class="dropdown-item" href="#">Delete</a>
+								</div>
 							</div>
-						</div>
-					</td>
-					<td>01 August 2020</td>
-				</tr>
+						</td>
+					</tr>
+				@endforeach
 			</tbody>
 		</table>
 	</div>
