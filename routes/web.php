@@ -12,7 +12,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 Route::get('/sub-category', [SubCategoryController::class, 'index']);
 Route::get('/order',[OrderController::class, 'index']);
 Route::get('/product', [ProductController::class, 'index']);
