@@ -15,7 +15,7 @@ class Address extends Model
         "state",
         "zip",
         "city",
-        "address_1"
+        "address_1",
         "address_2",
         "user_id",
         "status"
