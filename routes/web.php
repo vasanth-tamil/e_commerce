@@ -14,5 +14,5 @@ Route::get('/', function () {
 
 Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
 Route::get('/sub-category', [SubCategoryController::class, 'index']);
-Route::get('/order',[OrderController::class, 'index']);
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/order',[OrderController::class, 'index'])->name('admin.order');
+Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
