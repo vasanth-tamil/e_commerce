@@ -35,7 +35,7 @@
 								{{ $category->status? 'Active': 'Inactive' }}
 							</span>
 						</td>
-						<td class="py-1">{{ $category->created_at }}</td>
+						<td class="py-1">{{  date("d-M-Y h:m A", strtotime($category->created_at)) }}</td>
 						<td class="py-1">
 							<div class="d-flex gap-2">
 								<a href="{{ route('admin.category.show', $category->id) }}" class="btn btn-info light sharp d-flex justify-content-center align-items-center">

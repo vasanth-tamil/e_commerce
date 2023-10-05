@@ -9,16 +9,19 @@
 	.category-image {
 		width: 100px;
 		height: 100px;
-		object-fit: cover;
-		border-radius: 8px;
+		object-fit: contain;
+		border-raidus: 5px;
 	}
+	.sub-category {
+		min-height: 300px;
+	} 
 </style>
 @endpush
 
 @section('heading', 'Category')
 <div class="card p-5 mt-2">
 	<div class="d-flex">
-		<img src="{{ asset($category->image) }}" class="category-image border border-2 p-1 border-success" alt="">
+		<img src="{{ asset($category->image) }}" class="category-image p-1" alt="">
 
 		<div class="mx-3 d-flex justify-content-between w-100">
 			<div>
@@ -41,7 +44,7 @@
 	</div>
 
 	<div class="mt-5 mb-3 fs-5 fw-bold text-dark">Sub Categories</div>
-	<div class="table-responsive">
+	<div class="table-responsive sub-category">
 		<table class="table table-responsive-md">
 			<thead>
 				<tr>
@@ -62,7 +65,7 @@
 								{{ $subCategory->status? 'Active': 'Inactive' }}
 							</span>
 						</td>
-						<td class="py-1">{{ $subCategory->created_at }}</td>
+						<td class="py-1">{{ date("d-M-Y h:m A", strtotime($subCategory->created_at)) }}</td>
 						<td class="py-1">
 							<div class="dropdown">
 								<button type="button" class="btn btn-danger light sharp" data-bs-toggle="dropdown">
