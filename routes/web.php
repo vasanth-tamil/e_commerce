@@ -43,13 +43,26 @@ Route::group(['prefix' => 'sub-category'], function () {
         Route::post('/update/{id}', 'update')->name("admin.sub-category.update");
 
         // ajax method
-        Route::get('/status/{id}', 'change_status')->name("store.sub-category.status");
-        Route::delete('/{id}', 'destroy')->name("store.sub-category.delete");
+        Route::get('/show/{id}', 'show')->name("admin.sub-category.show");
+        Route::get('/status/{id}', 'change_status')->name("admin.sub-category.status");
+        Route::delete('/{id}', 'destroy')->name("admin.sub-category.delete");
+    });
+});
+
+// products
+Route::group(['prefix' => 'product'], function () {
+    Route::controller(ProductController::class)->group(function () {
+        Route::get("/", 'index')->name('admin.product');
+
+        Route::get("/create", 'create')->name('admin.product.create');
+        Route::post("/", 'store')->name('admin.product.store');
+
+        Route::get("/show/{id}", 'show')->name('admin.product.show');
+
+        Route::get("/{id}", 'edit')->name('admin.product.edit');
+        Route::post("/{id}", 'update')->name('admin.product.update');
     });
 });
 
 // orders
 Route::get('/order',[OrderController::class, 'index'])->name('admin.order');
-
-// products
-Route::get('/product', [ProductController::class, 'index'])->name('admin.product');

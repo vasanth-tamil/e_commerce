@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -43,7 +44,13 @@ class SubCategoryController extends Controller
 
     public function show(string $id)
     {
-        //
+        $subCategories = DB::table('sub_categories')
+                            ->selectRaw('id, name')
+                            ->where('category_id', $id)
+                            ->where('status', true)
+                            ->get();
+
+        return response($subCategories, 200);
     }
 
     public function edit(string $id)

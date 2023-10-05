@@ -20,4 +20,12 @@ class Product extends Model
         "sub_category_id",
         "status"
     ];
+
+    function category() {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    function subCategory() {
+        return $this->hasOne('App\Models\SubCategory', 'id', 'sub_category_id');
+    }
 }

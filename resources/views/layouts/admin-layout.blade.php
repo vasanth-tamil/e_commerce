@@ -196,6 +196,9 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 	<script src="{{ asset('assets/js/deznav-init.js') }}"></script>
 
+	{{-- axios --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js" integrity="sha512-emSwuKiMyYedRwflbZB2ghzX8Cw8fmNVgZ6yQNNXXagFzFOaQmbvQ1vmDkddHjm5AITcBIZfC7k4ShQSjgPAmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	@stack('script_1')
 	@stack('script_2')
 </body>

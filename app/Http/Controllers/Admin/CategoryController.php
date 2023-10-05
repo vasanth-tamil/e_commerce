@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::latest()->paginate(10); 
+        $categories = Category::latest()->select(['id', 'name', 'created_at', 'status'])->paginate(10); 
         return view('admin.category.index', compact('categories'));
     }
 
