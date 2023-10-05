@@ -12,13 +12,13 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $catgories = Category::paginate(10); 
-        return view('admin.category.index', ['categories' => $catgories]);
+        $categories = Category::latest()->paginate(10); 
+        return view('admin.category.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('admin.category.add');
+        return view('admin.category.create');
     }
 
     public function store(Request $request)
@@ -36,27 +36,45 @@ class CategoryController extends Controller
         ]);
         $category->image = asset($fileName);
 
-
         return back()->with("success", "Category Created Successfully !");
     }
 
     public function show(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $subCategories = $category->subCategories()->paginate(10);
+        return view('admin.category.show', compact('category', 'subCategories'));
     }
 
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view("admin.category.edit", ['category' => $category]);
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        if($request->file('image') != null) {
+            $fileName = 'storage/' . Storage::disk('public')->put('categories', $request->file('image'));
+        } else {
+            $fileName = $category->image;
+        }
+        
+        $category->update([
+            "name" => $request->name,
+            "image" => $fileName
+        ]);
+
+        return redirect(route("admin.category"));
     }
 
     public function destroy(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return back();
     }
 }
