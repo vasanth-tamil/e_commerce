@@ -7,6 +7,10 @@ class Helper {
         return "PRO-" . date("dmy") . "-" . (10001 + $count);
     }
 
+    static function makeOrderCode($count) {
+        return date("dmy") . "-" . (100 + $count);
+    }
+
     static function ConvertPrice($price) {
         setlocale(LC_MONETARY, 'en_IN');
         return "₹ " . number_format($price);

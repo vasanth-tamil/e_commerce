@@ -16,9 +16,10 @@
 @section('heading', 'Ecommerce.com')
 
 <div class="container" style="margin-top: 6rem;">
-    <form action="" method="POST">
+    <form action="{{ route('user.order.place-order') }}" method="POST">
+        @csrf
         <div class="g-3">
-            @foreach ($carts as $cart)
+            @foreach ($carts as $index => $cart)
                 <div class="mx-auto col-lg-8 col-md-8 col-sm-12 col-12">
                     <div class="card border-0 shadow-sm p-3">
                         <div class="d-flex">
@@ -38,7 +39,8 @@
                                         <div class="fw-bold text-black fs-3">{{ Helper::convertPrice($cart->product->price) }}</div>
                                         
                                         <div class="hstack justify-content-end w-25">
-                                            <input type="number" name="qty[]" onkeyup="calculatePrice('{{$cart->product->price}}', '{{ $cart->product->code }}', this.value)" onchange="calculatePrice('{{$cart->product->price}}', '{{ $cart->product->code }}', this.value)" min="1" max="100" value="1" class="form-control" />
+                                            <input hidden value='{{ $cart->product->id }}' name="cart[{{$index}}][id]"/>
+                                            <input type="number" name="cart[{{$index}}][qty]" onkeyup="calculatePrice('{{$cart->product->price}}', '{{ $cart->product->code }}', this.value)" onchange="calculatePrice('{{$cart->product->price}}', '{{ $cart->product->code }}', this.value)" min="1" max="100" value="1" class="form-control" />
                                             <button class="btn text-danger light" id="{{ $cart->product->code }}" onclick="addToCart({{ $cart->product->id }}, '{{ $cart->product->code }}')">
                                                     <i class="bi bi-trash2 fs-3"></i>
                                             </button>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
 
 use App\Http\Controllers\Auth\UserAuthController;
 
@@ -38,6 +39,14 @@ Route::group(['prefix' => 'user'], function () {
             Route::post('/add-cart', 'add_cart')->name('user.cart.add-cart');
         });
     });
+
+    // orders
+    Route::group(['prefix' => 'orders'], function () {
+        Route::controller(UserOrderController::class)->group(function () {
+            Route::post('/place-order', 'place_order')->name('user.order.place-order');
+        });
+    });
+
 });
 
 // category
