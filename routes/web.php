@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 
 
 use App\Http\Controllers\User\ProductController as UserProductController;
+use App\Http\Controllers\User\CartController;
 
 use App\Http\Controllers\Auth\UserAuthController;
 
@@ -25,6 +26,15 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'products'], function () {
         Route::controller(UserProductController::class)->group(function () {
             Route::get('/', 'index')->name('user.product');
+        });
+    });
+
+    // cart
+    Route::group(['prefix' => 'cart'], function () {
+        Route::controller(CartController::class)->group(function () {
+
+            // ajax
+            Route::post('/add-cart', 'add_cart')->name('user.cart.add-cart');
         });
     });
 });

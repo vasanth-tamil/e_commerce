@@ -72,6 +72,12 @@
                                     </svg>	
                                 </a>
                             </li>
+
+                            <li class="nav-item dropdown notification_dropdown">
+                                <a class="nav-link" href="javascript:void(0);">
+                                    <i class="bi bi-bag-fill"></i>
+                                </a>
+                            </li>
                                 
                             <li class="nav-item ps-3">
                                 <div class="dropdown header-profile2">

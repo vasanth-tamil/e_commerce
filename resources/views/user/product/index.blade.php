@@ -30,9 +30,12 @@
                     
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="fw-bold text-black fs-3">{{ Helper::convertPrice($product->price) }}</div>
-                            <button class="btn btn-primary light">
-                                <i class="bi bi-bag-plus-fill fs-3"></i>
-                                {{-- <i class="bi bi-bag-check-fill"></i> --}}
+                            <button class="btn btn-primary light" id="{{ $product->code }}" onclick="addToCart({{ $product->id }}, '{{ $product->code }}')" {{ $cart->contains($product->id)? 'disabled': ''}}>
+                                @if($cart->contains($product->id))
+                                    <i class="bi bi-bag-check-fill fs-3"></i>
+                                @else
+                                    <i class="bi bi-bag-plus-fill fs-3"></i>
+                                @endif
                             </button>
                         </div>
                     </div>
@@ -50,6 +53,18 @@
 
 @push("script_1")
 <script>
+    function addToCart(id, code) {
+        data = {product_id: id};
 
+        axios.post("{{ route('user.cart.add-cart') }}", data)
+             .then(response => {
+                console.log(response);
+                
+                const currentAddButton = document.querySelector(`#${code}`);
+                currentAddButton.disabled = true;
+                currentAddButton.innerHTML = `<i class="bi bi-bag-plus-fill fs-3"></i>`;
+             })
+             .catch(error => console.log(error));
+    }
 </script>
 @endpush
