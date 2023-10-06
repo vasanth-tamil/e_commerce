@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 
 class CartController extends Controller
-{       
+{
+    function index() {
+        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
+        return view("user.cart.index", ['carts' => $carts]);
+    }
+
     function add_cart (Request $request) {
         $this->validate($request, [
             "product_id" => "required"

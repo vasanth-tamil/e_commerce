@@ -74,7 +74,7 @@
                             </li>
 
                             <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link" href="javascript:void(0);">
+                                <a href="{{ route('user.cart') }}" class="nav-link" href="javascript:void(0);">
                                     <i class="bi bi-bag-fill"></i>
                                 </a>
                             </li>

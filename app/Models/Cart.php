@@ -18,4 +18,8 @@ class Cart extends Model
     ];
 
     public $timestamps = false;
+
+    function product() {
+        return $this->hasOne('App\Models\Product', 'id', 'product_id');
+    }
 }
