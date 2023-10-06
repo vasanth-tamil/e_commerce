@@ -9,11 +9,11 @@ use App\Http\Controllers\Admin\ProductController;
 
 use App\Http\Controllers\Auth\UserAuthController;
 
-Route::get('/sign-up-view', [UserAuthController::class, 'sign_up_view'])->name('user.sign-up-view');
-Route::get('/sign-up', [UserAuthController::class, 'sign_up'])->name('user.sign-up');
+Route::get('/sign_up', [UserAuthController::class, 'sign_up_view'])->name('user.sign_up');
+Route::post('/sign-up', [UserAuthController::class, 'sign_up'])->name('user.sign-up');
 
-Route::get('/', [UserAuthController::class, 'sign_in_view'])->name('user.sign-in-view');
-Route::get('/sign-in', [UserAuthController::class, 'sign_in'])->name('user.sign-in');
+Route::get('/', [UserAuthController::class, 'sign_in_view'])->name('user.sign_in');
+Route::post('/sign-in', [UserAuthController::class, 'sign_in'])->name('user.sign-in');
 
 // category
 Route::group(['prefix' => 'category'], function () {
