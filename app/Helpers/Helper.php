@@ -8,7 +8,8 @@ class Helper {
     }
 
     static function ConvertPrice($price) {
-        return "₹ " . $price; 
+        setlocale(LC_MONETARY, 'en_IN');
+        return "₹ " . number_format($price);
     }
 
     static function formatDate($date) {

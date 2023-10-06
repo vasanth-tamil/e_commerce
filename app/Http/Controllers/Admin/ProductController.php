@@ -36,7 +36,7 @@ class ProductController extends Controller
         $this->validate($request, [
             "name" => "required",
             "description" => "required",
-            "image" => "file|mimes:jpg,png,jpeg",
+            "image" => "required|file|mimes:jpg,png,jpeg",
             "stocks" => "required",
             "price" => "required",
             "category_id" => "required",
@@ -55,7 +55,7 @@ class ProductController extends Controller
             "name" => $request->name,
             "description" => $request->description,
             "image" => $fileName,
-            "stocks" => $request->stock,
+            "stocks" => $request->stocks,
             "price" => $request->price,
             "category_id" => $request->category_id,
             "sub_category_id" => $request->sub_category_id

@@ -42,8 +42,9 @@ class UserAuthController extends Controller
             "email" => "required",
             "password" => "required"
         ]);
+
         if(Auth::attempt($request->only(['email', 'password']))) {
-            dd(Auth::user());
+            return redirect(route('user.product'));
         }
 
         return back()->with("error", "email or password is incorrect.");

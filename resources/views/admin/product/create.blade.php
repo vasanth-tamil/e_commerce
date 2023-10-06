@@ -78,10 +78,10 @@
                 </div>
                 <div class="col-6 mb-1">
                     <div class="mb-2 p-1">
-                        <label class="text-label form-label">Stock</label>
-                        <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="0.00" value="{{ old('stock') }}">
+                        <label class="text-label form-label">stocks</label>
+                        <input type="text" name="stocks" class="form-control @error('stocks') is-invalid @enderror" placeholder="0.00" value="{{ old('stocks') }}">
                         <div class="invalid-feedback">
-                            @error('stock') {{ $message }} @enderror
+                            @error('stocks') {{ $message }} @enderror
                         </div>
                     </div>
                 </div>
