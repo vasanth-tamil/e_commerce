@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     function index() {
         $products = Product::paginate(15);
-        $cart = Cart::where('user_id', auth()->id())->get()->pluck('product_id');
+        $cart = Cart::with('product')->where('user_id', auth()->id())->get();
         
         return view('user.product.index', compact('products', 'cart'));
     }

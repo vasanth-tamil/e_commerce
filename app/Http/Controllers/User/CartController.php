@@ -30,4 +30,18 @@ class CartController extends Controller
 
         return response([], 200);
     }
+
+    function remove_cart (Request $request) {
+        $this->validate($request, [
+            "product_id" => "required"
+        ]);
+
+        $cart = Cart::where('product_id', $request->product_id);
+        if($cart->exists()) {
+            $cart->delete();
+            return response([], 200);
+        }
+
+        return response([], 404);
+    }
 }

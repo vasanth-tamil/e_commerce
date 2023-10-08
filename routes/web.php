@@ -37,6 +37,7 @@ Route::group(['prefix' => 'user'], function () {
 
             // ajax
             Route::post('/add-cart', 'add_cart')->name('user.cart.add-cart');
+            Route::post('/remove-cart', 'remove_cart')->name('user.cart.remove-cart');
         });
     });
 
