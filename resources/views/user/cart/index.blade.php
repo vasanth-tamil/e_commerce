@@ -12,9 +12,6 @@
 @endpush
 
 @section('content')
-
-@section('heading', 'Ecommerce.com')
-
 <div class="container" style="margin-top: 6rem;">
     <form action="{{ route('user.order.place-order') }}" method="POST">
         @csrf

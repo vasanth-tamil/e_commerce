@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string("code",10);
+            $table->string("code", 50);
 
             $table->bigInteger("user_id")->unsigned()->index()->nullable(False);
             $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
@@ -20,6 +20,8 @@ return new class extends Migration
 
             $table->bigInteger("vendor_id")->unsigned()->index()->nullable(False);
             $table->foreign("vendor_id")->references("id")->on("vendors")->onDelete('cascade');
+
+            $table->string("status", 50)->default('pending');
 
             $table->double("total_price")->default(0);
             $table->timestamps();

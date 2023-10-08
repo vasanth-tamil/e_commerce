@@ -24,20 +24,21 @@
 				</tr>
 			</thead>
 			<tbody>
+				@foreach($orders as $index => $order)
 					<tr>
-						<td class="py-1"><strong>1</strong></td>
+						<td class="py-1"><strong>{{ $index + 1 }}</strong></td>
 						<td class="py-1">
-							<a href="{{ route('admin.product.show', 1) }}">1</a>
+							<a href="{{ route('admin.product.show', 1) }}">{{ $order->code }}</a>
 						</td>
-						<td class="py-1">232</td>
-						<td class="py-1 fw-bold text-dark">221212131313131</td>
-						<td class="py-1">12</td>
+						<td class="py-1">{{ $order->user->name }}</td>
+						<td class="py-1 fw-bold text-dark">{{ $order->user->phone }}</td>
+						<td class="py-1">{{ Helper::convertPrice($order->total_price) }}</td>
 						<td class="py-1">
 							<span class="badge light {{ 1? 'badge-success': 'badge-danger' }}">
-								{{ 1? 'Deliverd': 'Inactive' }}
+								{{ $order->status }}
 							</span>
 						</td>
-						<td class="py-1">date</td>
+						<td class="py-1">{{ Helper::formatDateTime($order->created_at) }}</td>
 						<td class="py-1">
 							<div class="dropdown">
 								<button type="button" class="btn btn-danger light sharp" data-bs-toggle="dropdown">
@@ -51,9 +52,13 @@
 								</div>
 							</div>
 						</td>
-					</tr>			
+					</tr>
+				@endforeach			
 			</tbody>
 		</table>
+		<div class="d-flex justify-content-center mt-3">
+			{{ $orders->links() }}
+		</div>
 	</div>
 </div>
 @endsection

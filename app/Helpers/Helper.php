@@ -8,7 +8,7 @@ class Helper {
     }
 
     static function makeOrderCode($count) {
-        return date("dmy") . "-" . (100 + $count);
+        return "ORD-" + date("dmy") . "-" . (10001 + $count);
     }
 
     static function ConvertPrice($price) {
@@ -18,5 +18,9 @@ class Helper {
 
     static function formatDate($date) {
         return date("d M Y", strtotime($date));
+    }
+
+    static function formatDateTime($date) {
+        return date("d M Y (h:m A)", strtotime($date));
     }
 }

@@ -12,7 +12,6 @@ class OrderDetail extends Model
         "code",
         "product_id",
         "order_id",
-        "status",
         "qty",
         "total_price"
     ];

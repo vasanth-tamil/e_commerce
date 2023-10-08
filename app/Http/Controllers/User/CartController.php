@@ -44,4 +44,13 @@ class CartController extends Controller
 
         return response([], 404);
     }
+
+    function checkout_page() {
+        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
+        return view('user.cart.checkout', ['cart' => $carts]);
+    }
+
+    function checkout() {
+        return ;
+    }
 }

@@ -34,6 +34,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'cart'], function () {
         Route::controller(CartController::class)->group(function () {
             Route::get('/', 'index')->name('user.cart');
+            Route::get('/checkout-page', 'checkout_page')->name('user.cart.checkout-page');
 
             // ajax
             Route::post('/add-cart', 'add_cart')->name('user.cart.add-cart');

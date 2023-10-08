@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('address_2');
 
             // social links
-            $table->string('website');
-            $table->string('facebook');
-            $table->string('instagram');
+            $table->string('website')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

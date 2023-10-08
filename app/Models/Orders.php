@@ -14,6 +14,11 @@ class Orders extends Model
         "user_id",
         "address_id",
         "vendor_id",
+        "status",
         "total_price"
     ];
+
+    function user() {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

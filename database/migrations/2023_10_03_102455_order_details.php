@@ -10,15 +10,14 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->string("code",10);
+            $table->string("code", 50);
 
             $table->bigInteger("product_id")->unsigned()->index()->nullable(False);
             $table->foreign("product_id")->references("id")->on("products")->onDelete('cascade');
 
             $table->bigInteger("order_id")->unsigned()->index()->nullable(False);
             $table->foreign("order_id")->references("id")->on("orders")->onDelete('cascade');
-
-            $table->string("status")->default("pending"); // pending, delivered, canceled
+            
             $table->integer("qty")->default(0);
             $table->double("total_price")->default(0);
             $table->timestamps();

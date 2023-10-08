@@ -6,6 +6,7 @@
             <button class="ltn__utilize-close">×</button>
         </div>
         <div class="mini-cart-product-area ltn__scrollbar">
+        @php($totalPrice = 0)
         @foreach($cart as $cartItem)
             <div class="mini-cart-item clearfix">
                 <div class="mini-cart-img">
@@ -19,15 +20,16 @@
                     <span class="mini-cart-quantity">{{ $cartItem->qty }} x {{ Helper::convertPrice($cartItem->product->price) }}</span>
                 </div>
             </div>
+            @php($totalPrice += $cartItem->qty * $cartItem->product->price)
         @endforeach
         </div>
         <div class="mini-cart-footer">
             <div class="mini-cart-sub-total">
-                <h5>Subtotal: <span>$310.00</span></h5>
+                <h5>Subtotal: <span>{{ Helper::convertPrice($totalPrice) }}</span></h5>
             </div>
             <div class="btn-wrapper">
-                <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                <a href="#" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                <a href="{{ route('user.cart.checkout-page') }}" class="theme-btn-2 btn btn-effect-2">Checkout</a>
             </div>
             <p>Free Shipping on All Orders Over $100!</p>
         </div>

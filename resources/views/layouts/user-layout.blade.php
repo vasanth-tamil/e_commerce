@@ -121,7 +121,6 @@
                                             <span class="mini-cart-icon">
                                                 <i class="icon-handbag"></i>
                                                 <sup id="cart-item">{{ $cart->count() }}</sup>
-                                                
                                             </span>
                                             <h6><span>Your Cart</span> <span class="ltn__secondary-color">$89.25</span></h6>
                                         </a>
