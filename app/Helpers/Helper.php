@@ -8,7 +8,7 @@ class Helper {
     }
 
     static function makeOrderCode($count) {
-        return "ORD-" + date("dmy") . "-" . (10001 + $count);
+        return "ORD-" . date("dmy") . "-" . (10001 + $count);
     }
 
     static function ConvertPrice($price) {

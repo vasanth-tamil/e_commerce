@@ -7,12 +7,12 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 
-
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 
 use App\Http\Controllers\Auth\UserAuthController;
+use App\Http\Controllers\Auth\AdminAuthController;
 
 Route::get('/sign_up', [UserAuthController::class, 'sign_up_view'])->name('user.sign_up');
 Route::post('/sign-up', [UserAuthController::class, 'sign_up'])->name('user.sign-up');
@@ -20,6 +20,12 @@ Route::post('/sign-up', [UserAuthController::class, 'sign_up'])->name('user.sign
 Route::get('/', [UserAuthController::class, 'sign_in_view'])->name('user.sign_in');
 Route::post('/sign-in', [UserAuthController::class, 'sign_in'])->name('user.sign-in');
 
+Route::get('/admin', [AdminAuthController::class, 'sign_in_view'])->name('admin.sign_in');
+Route::post('/admin/sign-in', [AdminAuthController::class, 'sign_in'])->name('admin.sign-in');
+
+Route::middleware(['auth:admin'])->get('/check-auth', function(){
+    return auth()->guard('admin')->user();
+});
 
 Route::group(['prefix' => 'user'], function () {
     

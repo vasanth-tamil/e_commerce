@@ -434,6 +434,8 @@
                 const currentAddButton = document.querySelector(`#${code}`);
                 currentAddButton.disabled = true;
                 currentAddButton.innerHTML = `Already Added`;
+
+                location.reload();
              })
              .catch(error => console.log(error));
     }
@@ -449,6 +451,8 @@
                 const currentAddButton = document.querySelector(`#${code}`);
                 currentAddButton.disabled = true;
                 currentAddButton.innerHTML = `Add To Cart`;
+
+                location.reload();
              })
              .catch(error => console.log(error));
     }

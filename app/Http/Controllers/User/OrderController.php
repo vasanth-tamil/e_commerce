@@ -47,7 +47,7 @@ class OrderController extends Controller
             "user_id" => auth()->id(),
             "address_id" => $address->id,
             "vendor_id" => 1,
-            "total_price" => 200
+            "total_price" => 1
         ]);
 
         $carts = Cart::with('product')->where('user_id', auth()->id())->get();
@@ -67,6 +67,8 @@ class OrderController extends Controller
         
         $order->total_price = $total;
         $order->update();
-        return redirect(route('user.product'));
+        
+        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
+        return view('user.cart.success', ['cart' => $carts, 'order' => $order]);
     }
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\Admin;
 
 class DummySeeder extends Seeder
 {
@@ -12,19 +12,12 @@ class DummySeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for($index=0; $index<10; $index++) {
-            $token = 'products';
-            $imagePath = $faker->image(storage_path('app/public/products'), 500, 500);
-            if (($offset = strpos($imagePath, $token)) !== false) {
-                $imagePath = substr($imagePath, $offset);
-            }
-
-            Category::create([
-                "name" => $faker->word(),
-                "image" => $imagePath
-            ]);
-
-            echo $index;
-        }
+        Admin::create([
+            "logo" => "dummy.png",
+            "f_name" => "tamil",
+            "l_name" => "v",
+            "email" => "admin@gmail.com",
+            "password" => "admin@123"
+        ]);
     }
 }
