@@ -52,7 +52,7 @@
                             </div>
                             <!-- header-search-2 -->
                             <div class="header-search-2">
-                                <form id="#123" method="get"  action="#">
+                                <form action="{{ route('user.product.search') }}" method="GET" >
                                     <input type="text" name="search" value="" placeholder="Search here..."/>
                                     <button type="submit">
                                         <span><i class="icon-magnifier"></i></span>

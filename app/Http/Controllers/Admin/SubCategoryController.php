@@ -28,11 +28,14 @@ class SubCategoryController extends Controller
     {
         $this->validate($request, [
             "name" => 'required',
-            "image" => "required|file|mimes:jpeg,jpg,png,gif"
+            // "image" => "required|file|mimes:jpeg,jpg,png,gif"
         ]);
 
-        $fileName = 'storage/' . Storage::disk('public')->put('sub_categories', $request->file('image'));
-
+        $fileName = '';
+        if($request->image) {
+            $fileName = 'storage/' . Storage::disk('public')->put('sub_categories', $request->file('image'));
+        }
+        
         SubCategory::create([
             'category_id' => $categoryId,
             'name' => $request->name,

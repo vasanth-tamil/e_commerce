@@ -25,11 +25,14 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             "name" => 'required',
-            "image" => "required|file|mimes:jpeg,jpg,png,gif"
+            // "image" => "required|file|mimes:jpeg,jpg,png,gif"
         ]);
 
         // file name
-        $fileName = 'storage/' . Storage::disk('public')->put('categories', $request->file('image'));
+        $fileName = '';
+        if($request->image) {
+            $fileName = 'storage/' . Storage::disk('public')->put('categories', $request->file('image'));
+        }
         $category = Category::create([
             "name" => $request->name,
             "image" => $fileName

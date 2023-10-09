@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware' => AdminAuthMiddleware::class], 
 Route::group(['prefix' => '/'], function () {
     Route::controller(UserProductController::class)->group(function () {
         Route::get('/', 'index')->name('user.product');
+        Route::get('/search', 'search')->name('user.product.search');
     });
 });
 
