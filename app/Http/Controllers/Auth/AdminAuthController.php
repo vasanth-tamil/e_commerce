@@ -9,7 +9,10 @@ use Auth;
 class AdminAuthController extends Controller
 {
     function sign_in_view() {
-        return view('auth.admin.sign_in');
+        if(!auth()->guard('admin')->check()) {
+            return view('auth.admin.sign_in');
+        }
+        return redirect(route('admin.order'));
     }
     
     function sign_in(Request $request) {
@@ -23,5 +26,12 @@ class AdminAuthController extends Controller
         }
 
         return back()->with("error", "email or password is incorrect.");
+    }
+
+    function sign_out(Request $request) {
+        if(auth()->guard('admin')->check()) {
+            auth()->guard('admin')->logout();
+        } 
+        return redirect(route('admin.sign_in'));
     }
 }
