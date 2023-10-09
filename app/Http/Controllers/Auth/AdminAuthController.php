@@ -32,6 +32,6 @@ class AdminAuthController extends Controller
         if(auth()->guard('admin')->check()) {
             auth()->guard('admin')->logout();
         } 
-        return redirect(route('admin.sign_in'));
+        return redirect(route('admin.sign_in'))->with('success', "Signout Current User.");
     }
 }

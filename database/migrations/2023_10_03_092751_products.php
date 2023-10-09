@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('code', 50);
             $table->string('name', 100);
             $table->string('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('stocks')->default(0);
             $table->double('price')->default(0.0);
 

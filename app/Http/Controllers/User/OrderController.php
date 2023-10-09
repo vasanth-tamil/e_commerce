@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
 use DB;
+use Session;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Product;
@@ -18,7 +19,6 @@ class OrderController extends Controller
     function place_order(Request $request) {
         $this->validate($request, [
             "first_name" => "required",
-            "last_name" => "required",
             "phone_1" => "required",
             "country" => "required",
             "state" => "required",
@@ -26,6 +26,12 @@ class OrderController extends Controller
             "city" => "required",
             "address_1" => "required",
         ]);
+
+        // cart is emty throw messages
+        $carts = Session::get('cart');
+        if(0 == count($carts)) {
+            return back()->with('error', 'Cart is Empty');
+        }
 
         // address
         $address = Address::create([
@@ -50,20 +56,23 @@ class OrderController extends Controller
             "total_price" => 1
         ]);
 
-        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
         $total = 0;
-        foreach($carts as $cart) {
-            $total += $cart->product->price;
+        foreach($carts as $index => $cart) {
+            $product = Product::find($cart['id']);
+            $total += $product->price;
             OrderDetail::insert([
-                "code" => $cart->product->code,
-                "product_id" => $cart->product->id,
+                "code" => $product->code,
+                "product_id" => $product->id,
                 "order_id" => $order->id,
-                "qty" => $cart->qty,
-                "total_price" => $cart->qty * $cart->product->price
+                "qty" => $cart['qty'],
+                "total_price" => $cart['qty'] * $product->price
             ]);
 
-            $cart->delete();
+            unset($carts[$index]);
         }
+
+        // empty cart
+        Session::put('cart', []);
         
         $order->total_price = $total;
         $order->update();

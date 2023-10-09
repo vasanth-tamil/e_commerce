@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->string('f_name');
             $table->string('l_name')->nullable();
             $table->string('role')->default('viewer');

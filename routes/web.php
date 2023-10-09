@@ -19,7 +19,7 @@ use App\Http\Middleware\AdminAuthMiddleware;
 Route::get('/sign_up', [UserAuthController::class, 'sign_up_view'])->name('user.sign_up');
 Route::post('/sign-up', [UserAuthController::class, 'sign_up'])->name('user.sign-up');
 
-Route::get('/', [UserAuthController::class, 'sign_in_view'])->name('user.sign_in');
+Route::get('/sign_in', [UserAuthController::class, 'sign_in_view'])->name('user.sign_in');
 Route::post('/sign-in', [UserAuthController::class, 'sign_in'])->name('user.sign-in');
 
 // admin
@@ -83,21 +83,20 @@ Route::group(['prefix' => 'admin', 'middleware' => AdminAuthMiddleware::class], 
     Route::get('/order',[OrderController::class, 'index'])->name('admin.order');
 });
 
+// products
+Route::group(['prefix' => '/'], function () {
+    Route::controller(UserProductController::class)->group(function () {
+        Route::get('/', 'index')->name('user.product');
+    });
+});
 
 Route::group(['prefix' => 'user'], function () {
-    
-    // products
-    Route::group(['prefix' => 'products'], function () {
-        Route::controller(UserProductController::class)->group(function () {
-            Route::get('/', 'index')->name('user.product');
-        });
-    });
-
     // cart
     Route::group(['prefix' => 'cart'], function () {
         Route::controller(CartController::class)->group(function () {
             Route::get('/', 'index')->name('user.cart');
             Route::get('/checkout-page', 'checkout_page')->name('user.cart.checkout-page');
+            Route::get('/view-cart', 'view_cart')->name('user.cart.view-cart');
 
             // ajax
             Route::post('/add-cart', 'add_cart')->name('user.cart.add-cart');

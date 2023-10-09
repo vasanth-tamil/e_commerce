@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('image');
+            $table->string('image')->nullabe();
 
             $table->bigInteger("category_id")->unsigned()->index()->nullable(False);
             $table->foreign("category_id")->references("id")->on("categories")->onDelete('cascade');

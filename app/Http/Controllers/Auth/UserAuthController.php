@@ -17,8 +17,7 @@ class UserAuthController extends Controller
     function sign_up(Request $request) {
         $this->validate($request, [
             "name" => "required",
-            "phone" => "required|unique:users,phone",
-            "email" => "required|unique:users,email",
+            "email" => "required|email|unique:users,email",
             'password' => 'min:6',
             'password_confirmation' => 'required_with:password|same:password|min:6'
         ]);
@@ -30,7 +29,11 @@ class UserAuthController extends Controller
             "password" => $request->password
         ]);
 
-        return redirect(route("user.sign_in"))->with('success', 'New User Register Successfully !');
+        // and signin
+        if(Auth::attempt($request->only(['email', 'password']))) {
+            return back()->with('success', 'New User Register successfully.');
+        }
+
     }
 
     function sign_in_view() {

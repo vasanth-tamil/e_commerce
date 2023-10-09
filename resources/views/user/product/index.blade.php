@@ -19,6 +19,9 @@
         z-index: -10;
         background-color: #f8f8f8;
     }
+    .add-to-cart {
+        cursor: pointer;
+    }
 </style>
 @endpush
 
@@ -85,22 +88,23 @@
                             <div class="product-hover-action product-hover-action-2">
                                 <div class="product-hover-action product-hover-action-2">
                                 <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="icon-magnifier"></i>
-                                        </a>
-                                    </li>
                                     <li class="add-to-cart">
-                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <a href="#" title="Add to Cart">
                                             <a class="cart-text d-none d-xl-block user-select-none" id="{{ $product->code }}" onclick="addToCart({{ $product->id }}, '{{ $product->code }}')"> 
-                                                {{ $cart->pluck('product_id')->contains($product->id) ? 'Already Added': 'Add to Cart' }}
+                                                @if(collect(session()->get('cart'))->pluck('id')->contains($product->id))
+                                                    <i class="fa fa-check-circle"></i> Added
+                                                @else
+                                                    Add to Cart
+                                                @endif
                                             </a>
-                                            <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="icon-shuffle"></i>
+                                            <button class="cart-text w-100 d-block d-xl-none" id="mobile_{{$product->code}}" onclick="addToCart({{ $product->id }}, '{{ $product->code }}')">
+                                                
+                                                @if(collect(session()->get('cart'))->pluck('id')->contains($product->id))
+                                                    <i class="fa fa-check-circle pe-2"></i> Added
+                                                @else
+                                                    <i class="icon-handbag pe-2"></i>  Add to Cart
+                                                @endif
+                                            </button>
                                         </a>
                                     </li>
                                 </ul>
@@ -385,40 +389,6 @@
 </div>
 <!-- FEATURE AREA END -->
 {{-- end: feature --}}
-{{-- <div style="margin-top: 6rem;">
-
-    <div class="row g-3">
-        @foreach ($products as $product)
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                <div class="card border-0 shadow-sm p-3">
-                    <div>
-                        <div class="d-flex justify-content-center">
-                            <img src="{{ asset($product->image) }}" class="my-2 product-image"/>
-                        </div>
-                        <label class="mt-2 fs-4 text-black fw-bold d-block">{{ $product->name }}</label>
-                        <label>{{ $product->description }}</label>
-                    
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="fw-bold text-black fs-3">{{ Helper::convertPrice($product->price) }}</div>
-                            <button class="btn btn-primary light" id="{{ $product->code }}" onclick="addToCart({{ $product->id }}, '{{ $product->code }}')" {{ $cart->contains($product->id)? 'disabled': ''}}>
-                                @if($cart->contains($product->id))
-                                    <i class="bi bi-bag-check-fill fs-3"></i>
-                                @else
-                                    <i class="bi bi-bag-plus-fill fs-3"></i>
-                                @endif
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        @endforeach  
-    </div>
-
-    <div class="d-flex justify-content-center py-2">
-        {{ $products->links() }}
-    </div>
-
-</div> --}}
 @endsection
 
 @push("script_1")
@@ -433,9 +403,11 @@
                 
                 const currentAddButton = document.querySelector(`#${code}`);
                 currentAddButton.disabled = true;
-                currentAddButton.innerHTML = `Already Added`;
+                const currentAddMobButton = document.querySelector(`#mobile_${code}`);
+                currentAddMobButton.innerHTML = `<i class="fa fa-check-circle"></i> Added`;
+                currentAddButton.innerHTML = `<i class="fa fa-check-circle"></i> Added`;
 
-                location.reload();
+                //location.reload();
              })
              .catch(error => console.log(error));
     }

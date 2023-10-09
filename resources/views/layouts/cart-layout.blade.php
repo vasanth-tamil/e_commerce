@@ -7,20 +7,21 @@
         </div>
         <div class="mini-cart-product-area ltn__scrollbar">
         @php($totalPrice = 0)
-        @foreach($cart as $cartItem)
+        @php($carts = session()->get('cart') ?? [])
+        @foreach($carts as $cart)
             <div class="mini-cart-item clearfix">
                 <div class="mini-cart-img">
-                    <a href="#"><img src="{{ asset($cartItem->product->image) }}" alt="Image"></a>
-                    <button class="mini-cart-item-delete" onclick="removeToCart({{ $cartItem->product->id }}, '{{ $cartItem->product->code }}')">
+                    <a href="#"><img src="{{ asset($cart['image']) }}" alt="Image"></a>
+                    <button class="mini-cart-item-delete" onclick="removeToCart({{ $cart['id'] }}, '{{ $cart['code'] }}')">
                         <i class="icon-trash"></i>
                     </span>
                 </div>
                 <div class="mini-cart-info">
-                    <h6><a href="#">{{ $cartItem->product->name }}</a></h6>
-                    <span class="mini-cart-quantity">{{ $cartItem->qty }} x {{ Helper::convertPrice($cartItem->product->price) }}</span>
+                    <h6><a href="#">{{ $cart['name'] }}</a></h6>
+                    <span class="mini-cart-quantity">{{ $cart['qty'] }} x {{ Helper::convertPrice($cart['price']) }}</span>
                 </div>
             </div>
-            @php($totalPrice += $cartItem->qty * $cartItem->product->price)
+            @php($totalPrice += $cart['qty'] * $cart['price'])
         @endforeach
         </div>
         <div class="mini-cart-footer">
@@ -28,12 +29,11 @@
                 <h5>Subtotal: <span>{{ Helper::convertPrice($totalPrice) }}</span></h5>
             </div>
             <div class="btn-wrapper">
-                <a href="#" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                <a href="{{ route('user.cart.view-cart') }}" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                 <a href="{{ route('user.cart.checkout-page') }}" class="theme-btn-2 btn btn-effect-2">Checkout</a>
             </div>
             <p>Free Shipping on All Orders Over $100!</p>
         </div>
-
     </div>
 </div>
 

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('cart', function (Blueprint $table) {
+        Schema::create('whishlist', function (Blueprint $table) {
             $table->id();
             
             $table->bigInteger("user_id")->unsigned()->index()->nullable(False);
@@ -16,9 +16,7 @@ return new class extends Migration
 
             $table->bigInteger("product_id")->unsigned()->index()->nullable(False);
             $table->foreign("product_id")->references("id")->on("products")->onDelete('cascade');
-
-            $table->integer("qty")->default(0);
-
+            
             $table->timestamp("created_at")->currentTime();
         });
     }

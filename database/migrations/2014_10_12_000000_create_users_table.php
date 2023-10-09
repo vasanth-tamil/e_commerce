@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('avatar')->nullable();
             $table->string('name');
-            $table->string('phone')->unique();
+            $table->string('phone')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('otp')->nullable();
 

@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css')}}">
     <!-- Responsive css -->
     <link rel="stylesheet" href="{{ asset('assets/user/css/responsive.css')}}">
+    <style>
+        .section-bg-6{
+            background-color: #EDB82E;
+        }
+    </style>
 
 	@stack('style_1')
 	@stack('style_2')
@@ -120,7 +125,7 @@
                                         <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                             <span class="mini-cart-icon">
                                                 <i class="icon-handbag"></i>
-                                                <sup id="cart-item">{{ $cart->count() }}</sup>
+                                                <sup id="cart-item">{{ count(session()->get('cart')??[]) }}</sup>
                                             </span>
                                             <h6><span>Your Cart</span> <span class="ltn__secondary-color">$89.25</span></h6>
                                         </a>
@@ -160,7 +165,7 @@
                             <nav>
                                 <div class="ltn__main-menu">
                                     <ul>
-                                        <li class="menu-icon<?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>"><a href="index.php">Home</a>
+                                        <li class="menu-icon"><a href="{{ route('user.product') }}">Home</a>
                                          
                                         </li>
                                         <li class="menu-icon"><a href="About_Us.php">About</a>
