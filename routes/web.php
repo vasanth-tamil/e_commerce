@@ -97,6 +97,7 @@ Route::group(['prefix' => 'user'], function () {
             Route::get('/', 'index')->name('user.cart');
             Route::get('/checkout-page', 'checkout_page')->name('user.cart.checkout-page');
             Route::get('/view-cart', 'view_cart')->name('user.cart.view-cart');
+            Route::post('/update-cart', 'update_cart')->name('user.cart.update-cart');
 
             // ajax
             Route::post('/add-cart', 'add_cart')->name('user.cart.add-cart');

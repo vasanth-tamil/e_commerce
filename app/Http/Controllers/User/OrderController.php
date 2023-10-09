@@ -76,8 +76,7 @@ class OrderController extends Controller
         
         $order->total_price = $total;
         $order->update();
-        
-        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
-        return view('user.cart.success', ['cart' => $carts, 'order' => $order]);
+
+        return view('user.cart.success', ['order' => $order]);
     }
 }

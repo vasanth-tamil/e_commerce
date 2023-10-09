@@ -51,7 +51,7 @@ class ProductController extends Controller
             "code" => Helper::makeProductCode($productCount),
             "name" => $request->name,
             "description" => $request->description,
-            "image" => 'storage/' . $fileName,
+            "image" => $fileName,
             "stocks" => $request->stocks,
             "price" => $request->price,
             "category_id" => $request->category_id,

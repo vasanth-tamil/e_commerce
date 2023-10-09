@@ -14,8 +14,7 @@ use Session;
 class CartController extends Controller
 {
     function index() {
-        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
-        return view("user.cart.index", ['carts' => $carts]);
+        return view("user.cart.index");
     }
 
     function view_cart() {
@@ -66,10 +65,26 @@ class CartController extends Controller
         
         return response([], 200);
     }
+    
+    function update_cart (Request $request) {
+        $carts = Session::get('cart') ?? [];
+        
+        foreach($request->updateCart as $index => $ucart) {
+            
+            foreach($carts as $index => $cart) {
+                if($cart['id'] == $ucart['product_id']) {
+                    $carts[$index]['qty'] = $ucart['qty']; 
+                }
+            }
+        }
+        
+        Session::put('cart', $carts);
+        
+        return back()->with('success', 'Updated Cart !'); 
+    }
 
     function checkout_page() {
-        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
-        return view('user.cart.checkout', ['cart' => $carts]);
+        return view('user.cart.checkout');
     }
 
     function checkout() {

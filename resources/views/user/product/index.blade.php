@@ -407,7 +407,7 @@
                 currentAddMobButton.innerHTML = `<i class="fa fa-check-circle"></i> Added`;
                 currentAddButton.innerHTML = `<i class="fa fa-check-circle"></i> Added`;
 
-                //location.reload();
+                location.reload();
              })
              .catch(error => console.log(error));
     }
