@@ -43,18 +43,15 @@ class ProductController extends Controller
             "sub_category_id" => "required"
         ]);
 
-        if($request->file('image') != null) {
-            $fileName = 'storage/' . Storage::disk('public')->put('products', $request->file('image'));
-        } else {
-            $fileName = $category->image;
-        }
+        $fileName = 'storage/' . Storage::disk('public')->put('products', $request->file('image'));
+
         // file name
         $productCount = Product::count();
         Product::create([
             "code" => Helper::makeProductCode($productCount),
             "name" => $request->name,
             "description" => $request->description,
-            "image" => $fileName,
+            "image" => 'storage/' . $fileName,
             "stocks" => $request->stocks,
             "price" => $request->price,
             "category_id" => $request->category_id,
@@ -92,10 +89,19 @@ class ProductController extends Controller
             "sub_category_id" => "required"
         ]);
 
+        
         $product = Product::findOrFail($id);
+
+        if($request->file('image') != null) {
+            $fileName = 'storage/' . Storage::disk('public')->put('products', $request->file('image'));
+        } else {
+            $fileName = $product->image;
+        }
+
         $product->name = $request->name;
         $product->description = $request->description;
         $product->stocks = $request->stock;
+        $product->image = $fileName;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
         $product->sub_category_id = $request->sub_category_id;

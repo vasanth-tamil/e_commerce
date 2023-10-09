@@ -65,6 +65,7 @@ class SubCategoryController extends Controller
         $subCategory = SubCategory::findOrFail($id);
 
         if($request->file('image') != null) {
+            unlink($subCategory->image);
             $fileName = 'storage/' . Storage::disk('public')->put('categories', $request->file('image'));
         } else {
             $fileName = $subCategory->image;

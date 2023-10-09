@@ -57,14 +57,14 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
 
         if($request->file('image') != null) {
-            $fileName = 'storage/' . Storage::disk('public')->put('categories', $request->file('image'));
+            $fileName = 'storage/' .Storage::disk('public')->put('categories', $request->file('image'));
         } else {
             $fileName = $category->image;
         }
         
         $category->update([
             "name" => $request->name,
-            "image" => $fileName
+            "image" =>  $fileName
         ]);
 
         return redirect(route("admin.category"));

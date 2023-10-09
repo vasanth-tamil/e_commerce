@@ -12,9 +12,8 @@ class ProductController extends Controller
 {
     function index() {
         $products = Product::paginate(15);
-        $cart = Cart::with('product')->where('user_id', auth()->id())->get();
         
-        return view('user.product.index', compact('products', 'cart'));
+        return view('user.product.index', compact('products'));
     }
 
     function filter(Request $request) {
