@@ -77,7 +77,7 @@
         </div>
     @endif
 
-    @if(0 < count(session()->get('cart')))
+    @if(0 < count(session()->get('cart') ?? []))
         <form action="{{ route('user.order.place-order')}}" method="POST">
             @csrf
             <div class="row">

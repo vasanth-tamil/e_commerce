@@ -30,8 +30,8 @@
 <body>
     <header class="ltn__header-area ltn__header-3 section-bg-6">        
         <!-- ltn__header-middle-area start -->
-        <div class="ltn__header-middle-area">
-            <div class="container">
+        <div class="ltn__header-middle-area container-fluid">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col">
                         <div class="site-logo">
@@ -122,12 +122,11 @@
                                 <li>
                                     <!-- mini-cart 2 -->
                                     <div class="mini-cart-icon mini-cart-icon-2">
-                                        <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                                        <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle d-flex justify-content-end pt-2">
                                             <span class="mini-cart-icon">
                                                 <i class="icon-handbag"></i>
                                                 <sup id="cart-item">{{ count(session()->get('cart')??[]) }}</sup>
                                             </span>
-                                            <h6><span>Your Cart</span> <span class="ltn__secondary-color">$89.25</span></h6>
                                         </a>
                                     </div>
                                 </li>
@@ -152,7 +151,7 @@
         <!-- ltn__header-middle-area end -->
         
         <!-- header-bottom-area start -->
-        <div class="header-bottom-area ltn__border-top ltn__header-sticky  ltn__sticky-bg-white ltn__primary-bg---- menu-color-white---- d-none d-lg-block">
+        <div class="header-bottom-area ltn__header-sticky section-bg-6 ltn__primary-bg---- menu-color-white---- d-none d-lg-block">
             <div class="container">
                 <div class="row">
                     <div class="col header-menu-column justify-content-center">
@@ -168,10 +167,10 @@
                                         <li class="menu-icon"><a href="{{ route('user.product') }}">Home</a>
                                          
                                         </li>
-                                        <li class="menu-icon"><a href="About_Us.php">About</a>
-                                         
-                                         </li>
-                                         <li class="menu-icon"><a href="#">Pages</a>
+                                        {{-- <li class="menu-icon">
+                                            <a href="About_Us.php">About</a>
+                                        </li> --}}
+                                        {{-- <li class="menu-icon"><a href="#">Pages</a>
                                             <ul class="mega-menu">
                                                 <li><a href="#">Inner Pages</a>
                                                     <ul>
@@ -209,17 +208,16 @@
                                                     </ul>
                                                 </li>
                                             </ul>
+                                        </li> --}}
+                                        <li class="menu-icon">
+                                            <a href="{{ route('user.product.shop') }}">Shop</a>
                                         </li>
-                                        <li class="menu-icon"><a href="Shop.php">Shop</a>
-                                       
+                                        <li class="menu-icon">
+                                            <a href="#">Blog</a>
                                         </li>
-                                        <li class="menu-icon"><a href="Portfolio.php">Portfolio</a>
-                                         
+                                        <li>
+                                            <a href="#">Contact</a>
                                         </li>
-                                        <li class="menu-icon"><a href="Blog.php">Blog</a>
-                                            
-                                        </li>
-                                        <li><a href="Contact.php">Contact</a></li>
                                     </ul>
                                 </div>
                             </nav>
