@@ -20,12 +20,13 @@ class ProductController extends Controller
     
     function search(Request $request) {
         $products = Product::where("name", 'LIKE', $request->search . '%')->paginate(15);
-        
-        return view('user.product.index', compact('products'));
+        $latestProducts = Product::latest()->take(10)->get();
+
+        return view('user.product.index', compact('products', 'latestProducts'));
     }
     
     function shop(Request $request) {
-        $products = Product::paginate(9);
+        $products = Product::paginate(15);
         $categories = DB::table('categories')->where('status', true)->get();
 
         return view('user.product.shop', compact('products', 'categories'));
@@ -36,5 +37,36 @@ class ProductController extends Controller
         $relatedProducts = DB::table('products')->where('category_id', $product->category_id)->take(8)->get();
 
         return view('user.product.show', ['product' => $product, 'relatedProducts' => $relatedProducts]);
+    }
+
+    function filter(Request $request) {
+        $products = DB::table('products')
+                      ->when($request->categories, function ($query) {
+                            if(0 < count(request('categories')))
+                                return $query->whereIn('category_id', request('categories'));
+                      })
+                      ->when($request->min_price, function ($query) {
+                            return $query->where('price', '>=', request('min_price'));
+                      })
+                      ->when($request->max_price, function ($query) {
+                            return $query->where('price', '<=', request('max_price'));
+                      })
+                      ->when($request->keyword, function ($query) {
+                            return $query->where('name', 'LIKE', request('keyword') . '%');
+                      })
+                      ->when($request->sort_by, function ($query) {
+                            // Note:: sort_by parameter only have 3
+                            // low_to_high | high_to_low | latest
+                            if(request('sort_by') == 'low_to_high')
+                                return $query->orderBy('price');
+                            if(request('sort_by') == 'high_to_low')
+                                return $query->orderBy('price', 'desc');
+                            if(request('sort_by') == 'latest')
+                                return $query->latest();
+                      })
+                      ->take(15)
+                      ->get();
+
+        return response($products, 200);
     }
 }

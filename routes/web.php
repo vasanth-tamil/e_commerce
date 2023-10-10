@@ -88,6 +88,7 @@ Route::group(['prefix' => '/'], function () {
     Route::controller(UserProductController::class)->group(function () {
         Route::get('/', 'index')->name('user.product');
         Route::get('/search', 'search')->name('user.product.search');
+        Route::get('/filter', 'filter')->name('user.product.filter');
         Route::get('/shop', 'shop')->name('user.product.shop');
         Route::get('/show/{id}', 'show')->name('user.product.show');
     });

@@ -66,27 +66,26 @@
                             </li>
                             <li>
                                <div class="short-by text-center">
-                                    <select class="nice-select">
-                                        <option>Default sorting</option>
-                                        <option>Sort by popularity</option>
-                                        <option>Sort by new arrivals</option>
-                                        <option>Sort by price: low to high</option>
-                                        <option>Sort by price: high to low</option>
+                                    <select class="nice-select" id="sort_by">
+                                        <option value="">Default sorting</option>
+                                        <option value="latest">Sort by new arrivals</option>
+                                        <option value="low_to_high">Sort by price: low to high</option>
+                                        <option value="high_to_low">Sort by price: high to low</option>
                                     </select>
                                 </div>
-                                <div class="ltn__grid-list-tab-menu ">
+                                {{-- <div class="ltn__grid-list-tab-menu ">
                                     <div class="nav">
                                         <a class="active show" data-bs-toggle="tab" href="#liton_product_grid"><i class="icon-grid"></i></a>
                                         <a data-bs-toggle="tab" href="#liton_product_list"><i class="icon-menu"></i></a>
                                     </div>
-                                </div> 
+                                </div>  --}}
                             </li>
                         </ul>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="liton_product_grid">
                             <div class="ltn__product-tab-content-inner ltn__product-grid-view">
-                                <div class="row">
+                                <div class="row" id="product-grid-view">
                                     @foreach ($products as $product)
                                         <!-- ltn__product-item -->
                                         <div class="col-xl-4 col-sm-6 col-12">
@@ -143,7 +142,7 @@
                         </div>
                         <div class="tab-pane fade" id="liton_product_list">
                             <div class="ltn__product-tab-content-inner ltn__product-list-view">
-                                <div class="row">
+                                <div class="row" id="product-list-view">
                                     @foreach ($products as $product)
                                         <!-- ltn__product-item -->
                                         <div class="col-lg-12">
@@ -246,19 +245,19 @@
                         <!-- Search Widget -->
                         <div class="widget ltn__search-widget">
                             <form action="#">
-                                <input type="text" name="search" placeholder="Search your keyword...">
+                                <input type="text" name="search" id="search-input" placeholder="Search your keyword...">
                                 <button type="submit"><i class="icon-magnifier"></i></button>
                             </form>
                         </div>
                         <!-- Price Filter Widget -->
                         <div class="widget ltn__price-filter-widget">
                             <h4 class="ltn__widget-title">Price</h4>
-                            <div class="price_filter">
+                            <div class="price_filter" onmouseup="">
                                 <div class="price_slider_amount">
                                     <input type="submit"  value="Your range:"/> 
-                                    <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
+                                    <input type="text" class="amount_label" name="price"  placeholder="Add Your Price" /> 
                                 </div>
-                                <div class="slider-range"></div>
+                                <div class="slider-range1"></div>
                             </div>
                         </div>
                         <!-- Category Widget -->
@@ -266,7 +265,12 @@
                             <h4 class="ltn__widget-title">categories</h4>
                             <ul>
                                 @foreach($categories as $category)
-                                    <li><a href="#">{{ $category->name }}</a></li>
+                                    <li>
+                                        <input type="checkbox" class="category" id="category_{{ $category->id }}" value="{{ $category->id}}" class="pe-2"/>
+                                        <label for="category_{{ $category->id }}">
+                                            {{ $category->name }}
+                                        </label>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -340,4 +344,161 @@
     <!-- PRODUCT DETAILS AREA END -->
 @endsection
 @push('script_1')
+<script>
+    const productGridView = document.querySelector('#product-grid-view');
+    const productListView = document.querySelector('#product-list-view');
+
+    const sortBySelect = document.querySelector('#sort_by');
+    const searchInput = document.querySelector('#search-input');
+
+    searchInput.onkeyup = () => {
+        filter_products({
+            categories: categories,
+            minPrice: minPrice, 
+            maxPrice: maxPrice,
+            sortBy: sortBy
+        });
+    }
+
+    var categories = [];
+    var minPrice = 0;
+    var maxPrice = 100;
+    var sortBy = '';
+
+    sortBySelect.onchange = (e) => {
+        sortBy = e.target.value;
+        filter_products({
+            categories: categories,
+            minPrice: minPrice, 
+            maxPrice: maxPrice,
+            sortBy: sortBy
+        }); 
+    }
+
+    const categoryCheckBoxs = document.querySelectorAll('.category');
+    categoryCheckBoxs.forEach((categoryCheckBox, index) => {
+        categoryCheckBox.onclick = () => {
+            if(categoryCheckBoxs[index].checked) {
+                categories.push(categoryCheckBoxs[index].value);
+
+                // filter product
+                filter_products({
+                    categories: categories,
+                    minPrice: minPrice, 
+                    maxPrice: maxPrice,
+                    sortBy: sortBy
+                }); 
+            } else {
+                categories.pop(index);
+                filter_products({
+                    categories: categories,
+                    minPrice: minPrice, 
+                    maxPrice: maxPrice,
+                    sortBy: sortBy
+                }); 
+            }
+        }
+    });
+
+    // price slider 
+    $('.slider-range1').slider({
+        range: true,
+        min: 0,
+        max: 10000,
+        values: [ 0, 1000 ],
+        slide: function( event, ui ) {
+            $( ".amount_label" ).val( "₹" + ui.values[ 0 ] + " - ₹" + ui.values[ 1 ] );
+        },
+        change: function(event, ui) { 
+            minPrice = ui.values[0], 
+            maxPrice = ui.values[1];
+
+            filter_products({
+                minPrice: minPrice, 
+                maxPrice: maxPrice
+            });
+        },
+    });
+    $( ".amount_label" ).val("₹0 - ₹ 1000");
+
+    // product ui
+    const productGridHtml = (data) => {
+        console.log(data)
+        var url = "{{ route('user.product.show', ':id') }}";
+        url = url.replace(':id', data.id);
+
+        return `
+            <div class="col-xl-4 col-sm-6 col-12">
+                <div class="ltn__product-item text-center">
+                    <div class="product-img">
+                        <a href="#"><img src='${data.image}' alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                {{-- <li class="badge-1">New</li> --}}
+                            </ul>
+                        </div>
+                        <div class="product-hover-action product-hover-action-2">
+                            <ul>
+                                <li>
+                                    <a href="${url}" title="Quick View">
+                                        <i class="icon-magnifier"></i>
+                                    </a>
+                                </li>
+                                <li class="add-to-cart">
+                                    <a href="#" title="Add to Cart">
+                                        <a class="cart-text d-none d-xl-block user-select-none" id="${data.code}" onclick="addToCart(${data.id}, '${data.code}')"> 
+                                            @if(collect(session()->get('cart'))->pluck('id')->contains(1))
+                                                <i class="fa fa-check-circle"></i> Added
+                                            @else
+                                                Add to Cart
+                                            @endif
+                                        </a>
+                                        <button class="cart-text w-100 d-block d-xl-none" id="mobile_${data.code}" onclick="addToCart(${data.id}, '${data.code}')">
+                                            
+                                            @if(collect(session()->get('cart'))->pluck('id')->contains(1))
+                                                <i class="fa fa-check-circle pe-2"></i> Added
+                                            @else
+                                                <i class="icon-handbag pe-2"></i>  Add to Cart
+                                            @endif
+                                        </button>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-title"><a href="product-details.html">${data.name}</a></h2>
+                        <div class="product-price">
+                            <span>₹ ${data.price}</span>
+                            <del>$21.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    // filter api
+    function filter_products({categories, minPrice, maxPrice, sortBy}) {
+        console.log(categories, minPrice, maxPrice, sortBy, searchInput.value);
+
+        axios.get('{{ route("user.product.filter") }}', { 
+            params : {
+                "categories": categories,
+                "min_price": minPrice, 
+                "max_price": maxPrice,
+                "sort_by": sortBy,
+                "keyword": searchInput.value
+            }
+        })
+        .then(response => {
+            productGridView.innerHTML = '';
+
+            for(let data of response.data) {
+                productGridView.innerHTML += productGridHtml(data);
+            }
+
+        })
+        .catch(error => console.log(error));
+    }
+</script>
 @endpush
