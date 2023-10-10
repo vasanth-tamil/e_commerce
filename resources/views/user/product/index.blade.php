@@ -31,24 +31,48 @@
 @section('content')
 <!-- SLIDER AREA START (slider-6) -->
 <div class="ltn__slider-area ltn__slider-3 ltn__slider-6">
-    <div class="ltn__slide-two-active slick-slide-arrow-1 slick-slide-dots-1 arrow-white--">
-        <!-- ltn__slide-item  -->
-        <div class="ltn__slide-item ltn__slide-item-8 ltn__slide-item-9--- text-color-white bg-image bg-overlay-theme-black-10---" data-bs-bg="{{ asset('assets/user/img/slider/11.jpg') }}">
-            <div class="ltn__slide-item-inner text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 align-self-center">
-                            <div class="slide-item-info">
-                                <div class="slide-item-info-inner ltn__slide-animation">
-                                    <div class="slide-item-info">
-                                        <div class="slide-item-info-inner ltn__slide-animation">
-                                            <h6 class="slide-sub-title white-color slide-title-line-2--- animated">Flower & Gift</h6>
-                                            <h1 class="slide-title white-color animated ">Perfect Bunch <br>For Every Occasion</h1>
-                                            <div class="slide-brief animated d-none">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                            <div class="btn-wrapper animated">
-                                                <a href="service.html" class="theme-btn-1 btn btn-round">Shop Now</a>
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Category Widget -->
+            <div class="widget ltn__menu-widget">
+                <ul>
+                    @foreach($categories as $category)
+                        <li class="ps-2 page-item dropend">
+                            <label for="category_{{ $category->id }}" class="d-flex justify-content-between align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ $category->name }}
+
+                                <i class="fa fa-angle-double-right pe-0" aria-hidden="true"></i>
+                            </label>
+                            <ul class="dropdown-menu ms-2">
+                                @foreach($category->subCategories as $subCategory)
+                                    <li><a href="#" class="dropdown-item py-1" type="button">{{ $subCategory->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <div class="ltn__slide-two-active col-md-9 slick-slide-arrow-1 slick-slide-dots-1 arrow-white--">
+            <!-- ltn__slide-item  -->
+            <div class="ltn__slide-item ltn__slide-item-8 ltn__slide-item-9--- text-color-white bg-image bg-overlay-theme-black-10---" data-bs-bg="{{ asset('assets/user/img/slider/11.jpg') }}">
+                <div class="ltn__slide-item-inner text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        <div class="slide-item-info">
+                                            <div class="slide-item-info-inner ltn__slide-animation">
+                                                <h6 class="slide-sub-title white-color slide-title-line-2--- animated">Flower & Gift</h6>
+                                                <h1 class="slide-title white-color animated ">Perfect Bunch <br>For Every Occasion</h1>
+                                                <div class="slide-brief animated d-none">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                                </div>
+                                                <div class="btn-wrapper animated">
+                                                    <a href="service.html" class="theme-btn-1 btn btn-round">Shop Now</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -58,9 +82,11 @@
                     </div>
                 </div>
             </div>
+            <!--  -->
         </div>
-        <!--  -->
+
     </div>
+    
 </div>
 <!-- SLIDER AREA END -->
 

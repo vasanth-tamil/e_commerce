@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Cart;
 
 class ProductController extends Controller
@@ -14,8 +15,9 @@ class ProductController extends Controller
     function index() {
         $products = Product::take(15)->get();
         $latestProducts = Product::latest()->take(10)->get();
+        $categories = Category::with('subCategories')->get();
         
-        return view('user.product.index', ['products' => $products, 'latestProducts' => $latestProducts]);
+        return view('user.product.index', ['products' => $products, 'categories' => $categories, 'latestProducts' => $latestProducts]);
     }
     
     function search(Request $request) {
