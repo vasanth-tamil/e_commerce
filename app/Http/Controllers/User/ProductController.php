@@ -30,4 +30,11 @@ class ProductController extends Controller
 
         return view('user.product.shop', compact('products', 'categories'));
     }
+
+    function show(Request $request, $id) {
+        $product = Product::with(['category', 'subCategory'])->findOrFail($id);
+        $relatedProducts = DB::table('products')->where('category_id', $product->category_id)->take(8)->get();
+
+        return view('user.product.show', ['product' => $product, 'relatedProducts' => $relatedProducts]);
+    }
 }

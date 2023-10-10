@@ -101,7 +101,7 @@
                                                     <div class="product-hover-action product-hover-action-2">
                                                         <ul>
                                                             <li>
-                                                                <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                                <a href="{{ route('user.product.show', $product->id) }}" title="Quick View">
                                                                     <i class="icon-magnifier"></i>
                                                                 </a>
                                                             </li>
@@ -182,7 +182,7 @@
                                                     <div class="product-hover-action product-hover-action-2">
                                                         <ul>
                                                             <li>
-                                                                <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                                <a href="{{ route('user.product.show', $product->id) }}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
                                                                     <i class="icon-magnifier"></i>
                                                                 </a>
                                                             </li>

@@ -33,12 +33,14 @@
         <div class="ltn__header-middle-area container-fluid">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col">
-                        <div class="site-logo">
-                            <a href="index.html"><img src="{{ asset('assets/user/img/Ecommerce.jpeg') }}" alt="Logo" width="50" height="50"></a>
+                    <div class="col-md-auto col-4 my-5">
+                        <div class="site-logo position-absolute">
+                            <a href="#">
+                                <img src="{{ asset('assets/user/img/Ecommerce.jpeg') }}" alt="Logo" width="50" height="50">
+                            </a>
                         </div>
                     </div>
-                    <div class="col header-contact-serarch-column d-none d-xl-block">
+                    <div class="col-md-6 d-none d-xl-block">
                         <div class="header-contact-search">
                             <!-- header-feature-item -->
                             <div class="header-feature-item">
@@ -61,11 +63,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-auto col-8">
                         <!-- header-options -->
-                        <div class="ltn__header-options">
+                        <div class="ltn__header-options px-0">
                             <ul>
-                                <li class="d-none">
+                                {{-- <li class="d-none">
                                     <!-- ltn__currency-menu -->
                                     <div class="ltn__drop-menu ltn__currency-menu">
                                         <ul>
@@ -83,14 +85,14 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </li>
+                                </li> --}}
                                 <li class="d-none">
                                     <!-- header-search-1 -->
                                     <div class="header-search-wrap">
                                         <div class="header-search-1">
                                             <div class="search-icon">
-                                                <i class="icon-magnifier  for-search-show"></i>
-                                                <i class="icon-magnifier-remove  for-search-close"></i>
+                                                <i class="icon-magnifier for-search-show"></i>
+                                                <i class="icon-magnifier-remove for-search-close"></i>
                                             </div>
                                         </div>
                                         <div class="header-search-1-form">
@@ -122,7 +124,7 @@
                                 <li>
                                     <!-- mini-cart 2 -->
                                     <div class="mini-cart-icon mini-cart-icon-2">
-                                        <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle d-flex justify-content-end pt-2">
+                                        <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle d-flex justify-content-end pt-3">
                                             <span class="mini-cart-icon">
                                                 <i class="icon-handbag"></i>
                                                 <sup id="cart-item">{{ count(session()->get('cart')??[]) }}</sup>
