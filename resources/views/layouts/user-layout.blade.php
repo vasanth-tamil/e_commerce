@@ -404,6 +404,47 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/user/js/main.js') }}"></script>
 
+    
+	<script>
+		function addToCart(id, code) {
+			console.log(id);
+			data = {product_id: id};
+
+			axios.post("{{ route('user.cart.add-cart') }}", data)
+				.then(response => {
+					console.log(response);
+					
+					const currentAddButton = document.querySelector(`#${code}`);
+					currentAddButton.disabled = true;
+					const currentAddMobButton = document.querySelector(`#mobile_${code}`);
+					currentAddMobButton.innerHTML = `<i class="fa fa-check-circle"></i> Added`;
+					currentAddButton.innerHTML = `<i class="fa fa-check-circle"></i> Added`;
+
+					location.reload();
+				})
+				.catch(error => console.log(error));
+		}
+
+		function removeToCart(id, code) {
+			console.log(id);
+			data = {product_id: id};
+
+			axios.post("{{ route('user.cart.remove-cart') }}", data)
+				.then(response => {
+					console.log(response);
+					
+					const currentAddButton = document.querySelector(`#${code}`);
+                    if(currentAddButton) {
+                        currentAddButton.disabled = true;
+                        currentAddButton.innerHTML = `Add To Cart`;
+                    }
+
+					location.reload();
+				})
+				.catch(error => console.log(error));
+		}
+	</script>
+
 	@stack('script_1')
 	@stack('script_2')
 </body>

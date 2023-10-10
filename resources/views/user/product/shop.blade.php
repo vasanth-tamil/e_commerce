@@ -124,11 +124,6 @@
                                                                     </button>
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                                    <i class="icon-shuffle"></i>
-                                                                </a>
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -182,7 +177,7 @@
                                                     <div class="product-hover-action product-hover-action-2">
                                                         <ul>
                                                             <li>
-                                                                <a href="{{ route('user.product.show', $product->id) }}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                                <a href="{{ route('user.product.show', $product->id) }}" title="Quick View">
                                                                     <i class="icon-magnifier"></i>
                                                                 </a>
                                                             </li>
@@ -190,11 +185,6 @@
                                                                 <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
                                                                     <span class="cart-text d-none d-xl-block">Add to Cart</span>
                                                                     <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                                                    <i class="icon-shuffle"></i>
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -348,5 +338,6 @@
         </div>
     </div>
     <!-- PRODUCT DETAILS AREA END -->
-
 @endsection
+@push('script_1')
+@endpush

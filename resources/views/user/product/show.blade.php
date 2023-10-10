@@ -591,5 +591,6 @@
     </div>
 </div>
 <!-- PRODUCT SLIDER AREA END -->
-
 @endsection
+@push('script_1')
+@endpush
