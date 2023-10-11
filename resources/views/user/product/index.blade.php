@@ -38,9 +38,10 @@
         justify-content: center;
         align-items: center;       
         background-position: center; 
-        background-image: url({{ asset('assets/user/img/slider/11.jpg')}});
+        background-image: url("{{ asset('assets/user/img/slider/11.jpg')}}");
         background-repeat: no-repeat;
         background-size: auto;
+        
     }
 
     @media (max-width: 768px) { 
@@ -72,8 +73,8 @@
 </div>
 
 <!-- SLIDER AREA START (slider-6) -->
-<div class="container-fluid px-0">
-    <div class="row px-0">
+<div class="col-12 ps-0">
+    <div class="row">
         <div class="col-md-3 category--widget pe-0">
             <div class="w-100 px-2 py-1 bg-dark d-flex justify-content-between px-0">
                 <a href="#" class="p-2">
@@ -108,12 +109,12 @@
 
         <div class="col-md-9 hero">
             <div class="text-center">
-                <h6 class="slide-sub-title text-white">Flower & Gift</h6>
-                <h1 class="slide-title white-color ">Perfect Bunch <br>For Every Occasion</h1>
-                <div class="slide-brief animated d-none">
+                <h6 class="slide-sub-title text-white" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Flower & Gift</h6>
+                <h1 class="slide-title white-color" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">Perfect Bunch <br>For Every Occasion</h1>
+                <div class="slide-brief animated d-none" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
                 </div>
-                <div class="btn-wrapper animated">
+                <div class="btn-wrapper animated" data-aos="fade-up" data-aos-duration="700" data-aos-delay="400">
                     <a href="{{ route('user.product') }}" class="theme-btn-1 btn btn-round">Shop Now</a>
                 </div>
             </div>

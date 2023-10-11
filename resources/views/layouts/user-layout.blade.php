@@ -31,7 +31,7 @@
     <header class="ltn__header-area ltn__header-3 section-bg-6">        
         <!-- ltn__header-middle-area start -->
         <div class="ltn__header-middle-area container-fluid px-md-2 py-md-2 py-sm-3">
-            <div class="container-fluid px-0">
+            <div class="container-fluid p0">
                 <div class="row">
                     <div class="col-md-auto col-4 my-md-4">
                         <div class="site-logo position-absolute">
