@@ -33,6 +33,12 @@
 			{{ session()->get('success') }}
 		</div>
 	@endif
+    {{-- error message --}}
+    @if(session()->has('error'))
+		<div class="alert alert-danger col-md-12 mx-auto text-center mb-3 fw-bold" role="alert">
+			{{ session()->get('error') }}
+		</div>
+	@endif
 
     {{-- authentication --}}
     @if(!auth()->check())
@@ -70,11 +76,55 @@
                             </div>
                         </div>
                         <button class="btn theme-btn-1 btn-effect-1 text-uppercase mt-4">Sign UP</button>
-                        <p class="mt-30">I have already Account ? <a href="#">Sign In</a></p>
+                        <p class="mt-30">I have already Account ? <a href="#" data-toggle="modal" data-target="#signInModel">Sign In</a></p>
                     </form>
                 </div>
             </div>
         </div>
+
+        {{-- sign in method --}}
+        <!-- Modal -->
+        <div class="modal fade {{ count($errors->all()) < 3 ?'show': '' }}" role="modal" id="signInModel" tabindex="-1">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <!-- <i class="fas fa-times"></i> -->
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ltn__quick-view-modal-inner">
+                            <label class="fw-bold fs-6 d-block" href="javascript:void(0)">Sign In</label>
+                            <label></label>
+                            {{-- start:: login from --}}
+                            <form action="{{ route('user.sign-in') }}" method="POST">
+                                @csrf
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <input type="text" name="email" class="form-control mb-0 @error('email') is-invalid @enderror" placeholder="Email" value="">
+                                        <div class="invalid-feedback">
+                                            @error('email') {{ $message }} @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-4">
+                                        <input type="password" name="password" class="form-control mb-0 @error('password') is-invalid @enderror" placeholder="Password">
+                                        <div class="invalid-feedback">
+                                            @error('password') {{ $message }} @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase mt-4" type="submit">Sign IN</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {{-- end:: login form end --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end sign in method --}}
     @endif
 
     @if(0 < count(session()->get('cart') ?? []))
@@ -97,6 +147,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div>address</div>
                         @endif
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2">Billing Details</h4>

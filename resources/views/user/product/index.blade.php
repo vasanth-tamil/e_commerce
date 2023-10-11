@@ -26,10 +26,10 @@
         cursor: pointer;
     }
 
-    .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; /* remove the gap so it doesn't close */
-}
+    .header-menu {
+        height: 50px; 
+        width: 100%;
+    }
 
     @media (max-width: 768px) { 
         .category--widget {
@@ -40,6 +40,19 @@
 @endpush
 
 @section('content')
+
+<div class="header-menu position-relative">
+    <div class="position-absolute top-0 start-0 w-100 px-2 py-1 bg-dark d-flex justify-content-between">
+        <a href="#" class="p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
+                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+            </svg>
+            Categories
+        </a>
+        <a href="#" class="p-2"><i class="icon-magnifier align-middle"></i></a>
+    </div>  
+</div>
+
 <!-- SLIDER AREA START (slider-6) -->
 <div class="ltn__slider-area ltn__slider-3 ltn__slider-6 ">
     <div class="row">
@@ -115,7 +128,7 @@
         <div class="row justify-content-center">
             @foreach ($products as $product)
                 <!-- ltn__product-item -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                     <div class="ltn__product-item text-center">
                         <div class="product-img">
                             <a href="javascript:void(0)"><img src="{{ asset($product->image) }}" alt="#"></a>

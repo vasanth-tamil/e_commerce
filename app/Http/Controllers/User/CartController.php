@@ -84,10 +84,10 @@ class CartController extends Controller
     }
 
     function checkout_page() {
-        return view('user.cart.checkout');
-    }
+        $addresses = DB::table('addresses')
+                        ->where('id', auth()->id())
+                        ->get();
 
-    function checkout() {
-        return ;
+        return view('user.cart.checkout', ['addresses' => $addresses]);
     }
 }
