@@ -42,7 +42,7 @@
     <div class="ltn__utilize-menu-inner ltn__scrollbar">
         <div class="ltn__utilize-menu-head">
             <div class="site-logo">
-                <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+                <a href="index.html"><img src="{{ asset('assets/images/business.png') }}" height="50" width="50" alt="Logo"></a>
             </div>
             <button class="ltn__utilize-close">×</button>
         </div>
@@ -54,15 +54,22 @@
         </div>
         <div class="ltn__utilize-menu">
             <ul>
-                <li><a href="#">Home</a>
+                <li>
+                    <a href="#">Categories</a>
                     <ul class="sub-menu">
-                        <li><a href="index.html">Home Style - 01</a></li>
-                        <li><a href="index-2.html">Home Style - 02</a></li>
-                        <li><a href="index-3.html">Home Style - 03</a></li>
-                        <li><a href="index-4.html">Home Style - 04</a></li>
+                    @foreach(\App\Models\Category::with('subCategories')->get() as $category)
+                        <li>
+                            <a href="#" for="category_{{ $category->id }}">{{ $category->name }}</a>
+                            <ul class="ltn__utilize-menu">
+                                @foreach($category->subCategories as $subCategory)
+                                    <li><a href="#" type="button">{{ $subCategory->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                     </ul>
                 </li>
-                <li><a href="About_Us.php">About Us</a></li>
+                <li><a href="#">Contact</a></li>
                 <!-- <li><a href="Shop.php">Shop</a>
                     <ul class="sub-menu">
                         <li><a href="Shop.php">Shop</a></li>

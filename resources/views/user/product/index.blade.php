@@ -25,14 +25,25 @@
     .add-to-cart {
         cursor: pointer;
     }
+
+    .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* remove the gap so it doesn't close */
+}
+
+    @media (max-width: 768px) { 
+        .category--widget {
+            display: none;
+        }
+    }
 </style>
 @endpush
 
 @section('content')
 <!-- SLIDER AREA START (slider-6) -->
-<div class="ltn__slider-area ltn__slider-3 ltn__slider-6">
+<div class="ltn__slider-area ltn__slider-3 ltn__slider-6 ">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 category--widget">
             <!-- Category Widget -->
             <div class="widget ltn__menu-widget">
                 <ul>
@@ -44,7 +55,7 @@
                                 <i class="fa fa-angle-double-right pe-0" aria-hidden="true"></i>
                             </label>
                             <ul class="dropdown-menu ms-2">
-                                @foreach($category->subCategories as $subCategory)
+                                @foreach($category->subCategories  as $subCategory)
                                     <li><a href="#" class="dropdown-item py-1" type="button">{{ $subCategory->name }}</a></li>
                                 @endforeach
                             </ul>

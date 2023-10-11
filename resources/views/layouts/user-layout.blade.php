@@ -36,7 +36,7 @@
                     <div class="col-md-auto col-4 my-5">
                         <div class="site-logo position-absolute">
                             <a href="#">
-                                <img src="{{ asset('assets/user/img/Ecommerce.jpeg') }}" alt="Logo" width="50" height="50">
+                                <img src="{{ asset('assets/images/business.png') }}" alt="Logo" width="50" height="50">
                             </a>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                     <div class="col header-menu-column justify-content-center">
                         <div class="sticky-logo">
                             <div class="site-logo">
-                                <a href="index.html"><img src="{{ asset('assets/user/img/Ecommerce.jpeg') }}" alt="Logo" width="100" height="100"></a>
+                                <a href="index.html"><img src="{{ asset('assets/images/business.png') }}" alt="Logo" width="100" height="100"></a>
                             </div>
                         </div>
                         <div class="header-menu header-menu-2">
