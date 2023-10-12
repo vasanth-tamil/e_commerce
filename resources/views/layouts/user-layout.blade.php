@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/responsive.css')}}">
     <style>
         .section-bg-6{
-            background-color: #f1c658;
+            background-color: #EDB82E;
         }
     </style>
 
@@ -30,13 +30,13 @@
 <body>
     <header class="ltn__header-area ltn__header-3 section-bg-6">        
         <!-- ltn__header-middle-area start -->
-        <div class="ltn__header-middle-area container-fluid px-md-2 py-md-2 py-sm-3">
-            <div class="container-fluid p0">
+        <div class="ltn__header-middle-area container-fluid">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-auto col-4 my-md-4">
+                    <div class="col-md-auto col-4 my-5">
                         <div class="site-logo position-absolute">
                             <a href="#">
-                                <img src="{{ asset('assets/images/business.png') }}" alt="Logo" width="50" height="50">
+                                <img src="{{ asset('assets/user/img/Ecommerce.jpeg') }}" alt="Logo" width="50" height="50">
                             </a>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                     <div class="col header-menu-column justify-content-center">
                         <div class="sticky-logo">
                             <div class="site-logo">
-                                <a href="{{ route('user.product') }}"><img src="{{ asset('assets/images/business.png') }}" alt="Logo" width="100" height="100"></a>
+                                <a href="index.html"><img src="{{ asset('assets/user/img/Ecommerce.jpeg') }}" alt="Logo" width="100" height="100"></a>
                             </div>
                         </div>
                         <div class="header-menu header-menu-2">

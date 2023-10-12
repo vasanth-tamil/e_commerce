@@ -27,7 +27,7 @@
         cursor: pointer;
     }
 
-    .header-menu {
+    .header-menu-1 {
         height: 49px; 
         width: 100%;
         display: none;
@@ -51,7 +51,7 @@
         .category--widget {
             display: none;
         }
-        .header-menu {
+        .header-menu-1 {
             display: block;
         }
     }
@@ -60,7 +60,7 @@
 
 @section('content')
 
-<div class="header-menu position-relative">
+<div class="header-menu-1 position-relative">
     <div class="position-absolute top-0 start-0 w-100 px-2 py-1 bg-dark d-flex justify-content-between">
         <a href="#" class="p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
